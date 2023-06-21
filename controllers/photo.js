@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose'); 
+const { ObjectId } = require('mongodb');
 
 const Photo =  require('../models/photo');
 

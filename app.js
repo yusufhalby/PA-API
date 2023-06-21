@@ -4,14 +4,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const helmet = require('helmet');
+
 //routers
 const projectRoutes = require('./routes/project');
 const authRoutes = require('./routes/auth');
 
+// console.log(process.env.MONGO_USER);
 //DB
-const MONGODB_URI = 'mongodb://localhost:27017/project?retryWrites=true&w=majority';
+// const MONGODB_URI = 'mongodb://127.0.0.1:27017/project?retryWrites=true&w=majority';
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.bs6du.mongodb.net/${process.env.MONGO_DEF_DB}?retryWrites=true&w=majority`;
 
 const app = express();
+
+app.use(helmet());
 
 //photos storage handler
 const fileStorage = multer.diskStorage({
@@ -67,7 +73,7 @@ app.use((error, req, res, next)=>{
 mongoose
     .connect(MONGODB_URI)
     .then(result => {
-        app.listen(8080);
+        app.listen(process.env.PORT || 8080);
         console.log('connected');
     })
     .catch(err => {

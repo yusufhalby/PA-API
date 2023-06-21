@@ -1,5 +1,7 @@
-const Device = require('../models/device');
+const mongoose = require('mongoose'); 
 
+const Device = require('../models/device');
+const { ObjectId } = require('mongodb');
 
 exports.getDevices = (req, res, next) => {
     const currentPage = req.query.page || 1;
@@ -59,7 +61,7 @@ exports.putDevice = (req, res, next) => {
     // const deviceId = new ObjectId("64333da6a421c67ef36399dd");
     // // const deviceId = req.body.deviceId;
     const userId = new ObjectId("6423038ec260d28577197a88");
-    // const deviceId = req.body.deviceId;
+    // const userId = req.body.userId;
     const device = new Device({
         waterPump,
         anyPump,

@@ -1,0 +1,7 @@
+{
+    "env":{
+        "MONGO_USER":"Halby",
+        "MONGO_PASS":"root",
+        "MONGO_DEF_DB":"project"
+    }
+}
