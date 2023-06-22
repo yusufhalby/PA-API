@@ -55,17 +55,21 @@ exports.getLog = (req, res, next) => {
 
 exports.postLog = (req, res, next) => {
     console.log(req);
-    const ph = req.body.ph;
+    const n = req.body.n;
+    const p = req.body.p;
+    const k = req.body.k;
+    const temp = req.body.temp;
     const humidity = req.body.humidity;
-    const co2 = req.body.co2;
-    const landId = new ObjectId("64334038a421c67ef36399e1") ;
-    // const landId = req.body.landId;
-    const deviceId = new ObjectId("64333da6a421c67ef36399dd");
-    // const deviceId = req.body.deviceId;
+    const ph = req.body.ph;
+    const landId = req.body.landId || new ObjectId("64334038a421c67ef36399e1");
+    const deviceId = req.body.deviceId || new ObjectId("64333da6a421c67ef36399dd");
     const log = new Log({
-        ph,
+        n,
+        p,
+        k,
+        temp,
         humidity,
-        co2,
+        ph,
         landId,
         deviceId
     });

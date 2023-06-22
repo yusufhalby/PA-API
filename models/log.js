@@ -4,7 +4,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const logSchema = new Schema({
-    ph:{
+    n:{
+        type: Decimal128,
+        required: true,
+        get: getValue,
+    },
+    p:{
+        type: Decimal128,
+        required: true,
+        get: getValue,
+    },
+    k:{
+        type: Decimal128,
+        required: true,
+        get: getValue,
+    },
+    temp:{
         type: Decimal128,
         required: true,
         get: getValue,
@@ -14,7 +29,7 @@ const logSchema = new Schema({
         required: true,
         get: getValue,
     },
-    co2:{
+    ph:{
         type: Decimal128,
         required: true,
         get: getValue,
@@ -37,7 +52,7 @@ module.exports = mongoose.model('Log', logSchema);
 
 function getValue(value) {
     if (typeof value !== 'undefined') {
-       return parseFloat(value.toString());
+        return parseFloat(value.toString());
     }
     return value;
 };
