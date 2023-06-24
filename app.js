@@ -70,6 +70,17 @@ app.use((req, res, next) => {
 app.use('/auth', authRoutes);
 app.use(projectRoutes);
 
+// Route to handle requests to the API root domain
+app.get('/', (req, res, next)=>{
+    // Send a welcome message to users accessing the root domain
+    return res.send(`
+        <h1>Welcome to the Precision Agriculture API!</h1>
+        <p>This API provides endpoints for accessing and managing precision agriculture data. It offers a range of features and functionalities to optimize agricultural processes, improve crop yield, and enhance farming efficiency.</p>
+        <p>Please refer to the API documentation for detailed information on available endpoints and how to interact with the API.</p>
+        <h2>Happy farming!</h2>
+    `);
+})
+
 // Error handler middleware
 app.use((error, req, res, next)=>{
     console.log(error);
