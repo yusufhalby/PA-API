@@ -1,25 +1,33 @@
-const path = require('path');
+/**
 
+app.js
+This file is the entry point for the API application built using Express.js framework.
+It sets up the server, database connection, middleware, and defines the routes for handling incoming requests.
+*/
+
+// Import required modules
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const helmet = require('helmet');
 
-//routers
+// Import routers
 const projectRoutes = require('./routes/project');
 const authRoutes = require('./routes/auth');
 
-// console.log(process.env.MONGO_USER);
-//DB
-// const MONGODB_URI = 'mongodb://127.0.0.1:27017/project?retryWrites=true&w=majority';
+// Set up database connection URI
+// const MONGODB_URI = 'mongodb://127.0.0.1:27017/project?retryWrites=true&w=majority'; //for dev
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.bs6du.mongodb.net/${process.env.MONGO_DEF_DB}?retryWrites=true&w=majority`;
 
+// Initialize Express application
 const app = express();
 
+// Set up security middleware
 app.use(helmet());
 
-//photos storage handler
+// Configure multer for handling file uploads
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'images');
@@ -29,7 +37,7 @@ const fileStorage = multer.diskStorage({
     },
 });
 
-//photos filter
+// Configure photos filter
 const fileFilter = (req, file, cb) => {
     switch (file.mimetype) {
         case 'image/png':
@@ -43,12 +51,12 @@ const fileFilter = (req, file, cb) => {
     }
 };  
 
-//body parsers 
+// Configure body parsers 
 app.use(bodyParser.json());
 app.use(multer({storage: fileStorage, fileFilter}).single('image'));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// CORS Headers - Cross-Origin Resource Sharing 
+//  Set up CORS Headers - Cross-Origin Resource Sharing 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE'); 
@@ -56,11 +64,11 @@ app.use((req, res, next) => {
     next();
 });
 
-//use routers
+// Set up routes
 app.use('/auth', authRoutes);
 app.use(projectRoutes);
 
-//error handler
+// Error handler middleware
 app.use((error, req, res, next)=>{
     console.log(error);
     const status = error.statusCode || 500; //setting default value of 500
@@ -69,11 +77,11 @@ app.use((error, req, res, next)=>{
     res.status(status).json({message: message, data});
 });
 
-//DB connection
+// Connect to the database and start the server
 mongoose
     .connect(MONGODB_URI)
     .then(result => {
-        app.listen(process.env.PORT || 8080);
+        app.listen(process.env.PORT || 8080); //localhost:8080 in development
         console.log('connected');
     })
     .catch(err => {

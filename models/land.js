@@ -7,20 +7,17 @@ const landSchema = new Schema({
         type: Number,
         required: true
     },
+    plantLabel:{
+        type: String,
+        required: true
+    },
     description:{
         type: String,
-    },
-    plantId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Plant',
-    },
-    deviceId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Device',
     },
     userId:{
         type: Schema.Types.ObjectId,
         ref: 'User',
+        required: true
     },
 
 });

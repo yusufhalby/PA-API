@@ -34,6 +34,15 @@ const logSchema = new Schema({
         required: true,
         get: getValue,
     },
+    rainfall:{
+        type: Decimal128,
+        required: true,
+        get: getValue,
+    },
+    label:{
+        type: String,
+        required: true,
+    },
     landId:{
         type: Schema.Types.ObjectId,
         ref: 'Land',
@@ -41,6 +50,10 @@ const logSchema = new Schema({
     deviceId:{
         type: Schema.Types.ObjectId,
         ref: 'Device',
+    },
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
 
 }, {toJSON: {getters: true}}

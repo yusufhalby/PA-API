@@ -18,6 +18,10 @@ const photoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Device',
     },
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
     isChecked:{
         type: Boolean,
         default: false

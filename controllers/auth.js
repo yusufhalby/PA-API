@@ -5,13 +5,13 @@ const jwt = require('jsonwebtoken');
 
 const {
     validationResult
-} = require('express-validator/check');
+} = require('express-validator');
 
 const User = require('../models/user');
 
 
 exports.signup = (req, res, next) => {
-    console.log("im here");
+    // console.log("im here");
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         const error =  new Error('Validation failed.');

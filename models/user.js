@@ -15,6 +15,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    isSuperAdmin:{
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = mongoose.model('User', userSchema);
