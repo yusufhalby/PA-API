@@ -1,9 +1,18 @@
+/**
+
+device.js
+This file contains the controller functions for device-related operations.
+It includes functions for fetching all devices, fetching user-specific devices,
+fetching a single device, creating a new device, deleting a device, and updating a device.
+*/
+
+// Import required modules
 const mongoose = require('mongoose'); 
 
 const Device = require('../models/device');
 const { ObjectId } = require('mongodb');
 
-// super admin only
+// Get all devices (Super admin only)
 exports.getAllDevices = (req, res, next) => {
     const currentPage = req.query.page || 1;
     const perPage = 10;
@@ -32,7 +41,7 @@ exports.getAllDevices = (req, res, next) => {
     });
 };
 
-
+//Get user-specific devices
 exports.getDevices = (req, res, next) => {
     const userId= req.userId;
     const currentPage = req.query.page || 1;
@@ -62,7 +71,7 @@ exports.getDevices = (req, res, next) => {
     });
 };
 
-
+//Get a single device
 exports.getDevice = (req, res, next) => {
     const userId = req.userId;
     const deviceId = req.params.deviceId;
@@ -88,7 +97,7 @@ exports.getDevice = (req, res, next) => {
     });
 };
 
-
+//Create a new device
 exports.postDevice = (req, res, next) => {
     // console.log(req);
     const waterPump = req.body.waterPump;
@@ -119,7 +128,7 @@ exports.postDevice = (req, res, next) => {
     });
 };
 
-
+//Delete a device
 exports.deleteDevice = (req, res, next) => {
     const userId = req.userId;
     const deviceId = req.params.deviceId;
@@ -148,7 +157,7 @@ exports.deleteDevice = (req, res, next) => {
     });
 };
 
-
+//Update a device
 exports.postUpdateDevice = (req, res, next) => {
     const userId = req.userId;
     const waterPump = req.body.waterPump;

@@ -1,7 +1,15 @@
+/**
+
+photo.js
+This file defines the photo model for the API application using Mongoose.
+*/
+
+// Import required modules
 const mongoose = require('mongoose'); 
 
 const Schema = mongoose.Schema;
 
+// Define photo schema
 const photoSchema = new Schema({
     photoUrl:{
         type: String,
@@ -29,10 +37,5 @@ const photoSchema = new Schema({
 
 },{ timestamps: true });
 
+// Export the photo model
 module.exports = mongoose.model('Photo', photoSchema);
-
-
-
-
-
-

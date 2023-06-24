@@ -1,9 +1,18 @@
+/**
+ * log.js
+ *
+ * This file contains the controller functions for log-related operations.
+ * It includes functions for fetching all logs, fetching user-specific logs,
+ * fetching a single log, creating a new log, deleting a log, and fetching logs for a specific land.
+ */
+
+// Import required modules
 const Log = require('../models/log');
 const Device = require('../models/device');
 const Land = require('../models/land');
 
 
-// super admin only
+// Get all logs (Super admin only)
 exports.getAllLogs = (req, res, next) => {
     const currentPage = req.query.page || 1;
     const perPage = 10;
@@ -33,6 +42,7 @@ exports.getAllLogs = (req, res, next) => {
 };
 
 
+// Get user-specific logs
 exports.getLogs = (req, res, next) => {
     const currentPage = req.query.page || 1;
     const perPage = 10;
@@ -63,6 +73,7 @@ exports.getLogs = (req, res, next) => {
 };
 
 
+// Get a single log
 exports.getLog = (req, res, next) => {
     const logId = req.params.logId;
     const userId = req.userId;
@@ -89,6 +100,7 @@ exports.getLog = (req, res, next) => {
 };
 
 
+// Create a new log
 exports.postLog = (req, res, next) => {
     // console.log(req);
     const n = req.body.n;
@@ -153,6 +165,7 @@ exports.postLog = (req, res, next) => {
 };
 
 
+// Delete a log
 exports.deleteLog = (req, res, next) => {
     const userId = req.userId;
     const logId = req.params.logId;
@@ -182,6 +195,7 @@ exports.deleteLog = (req, res, next) => {
 };
 
 
+// Get logs for a specific land
 exports.getLandLogs = (req, res, next) => {
     const landId = req.params.landId;
     const userId = req.userId;

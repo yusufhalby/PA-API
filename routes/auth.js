@@ -1,3 +1,11 @@
+/**
+
+auth.js
+This file defines the authentication routes for the API application using Express.js.
+It handles user signup and login requests.
+*/
+
+// Import required modules
 const express = require('express');
 
 const {

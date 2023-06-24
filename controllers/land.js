@@ -1,9 +1,18 @@
+/**
+ * land.js
+ *
+ * This file contains the controller functions for land-related operations.
+ * It includes functions for fetching all lands, fetching user-specific lands,
+ * fetching a single land, creating a new land, deleting a land, and updating a land.
+ */
+
+// Import required modules
 const mongoose = require('mongoose'); 
 
 const Land = require('../models/land');
 const { ObjectId } = require('mongodb');
 
-// super admin only
+// Get all lands (Super admin only)
 exports.getAllLands = (req, res, next) => {
     const currentPage = req.query.page || 1;
     const perPage = 10;
@@ -33,6 +42,7 @@ exports.getAllLands = (req, res, next) => {
 };
 
 
+// Get user-specific lands
 exports.getLands = (req, res, next) => {
     const userId= req.userId;
     const currentPage = req.query.page || 1;
@@ -63,6 +73,7 @@ exports.getLands = (req, res, next) => {
 };
 
 
+// Get a single land
 exports.getLand = (req, res, next) => {
     const userId= req.userId;
     const landId = req.params.landId;
@@ -89,6 +100,7 @@ exports.getLand = (req, res, next) => {
 };
 
 
+// Create a new land
 exports.postLand = (req, res, next) => {
     // console.log(req);
     const userId= req.userId;
@@ -120,6 +132,7 @@ exports.postLand = (req, res, next) => {
 };
 
 
+// Delete a land
 exports.deleteLand = (req, res, next) => {
     const userId = req.userId;
     const landId = req.params.landId;
@@ -149,6 +162,7 @@ exports.deleteLand = (req, res, next) => {
 };
 
 
+// Update a land
 exports.postUpdateLand = (req, res, next) => {
     // console.log(req);
     const userId= req.userId;

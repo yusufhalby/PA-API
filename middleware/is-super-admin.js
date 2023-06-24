@@ -1,3 +1,12 @@
+
+/**
+
+is-super-admin.js
+This file defines the super admin authorization middleware for the API application.
+It checks if the user is a super admin by verifying their user ID and the isSuperAdmin property in the User model.
+*/
+
+// Import required modules
 const User = require('../models/user');
 
 module.exports = (req, res, next) => {

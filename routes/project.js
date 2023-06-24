@@ -1,3 +1,12 @@
+/**
+
+project.js
+This file defines the project routes for the API application using Express.js.
+It handles various routes related to photos, logs, devices, and lands.
+Authentication and authorization middleware (isAuth, isSuperAdmin) are applied to specific routes.
+*/
+
+// Import required modules
 const express = require('express');
 
 const photoController = require('../controllers/photo');
@@ -9,7 +18,8 @@ const isSuperAdmin = require('../middleware/is-super-admin');
 
 const router = express.Router();
 
-//super admin
+
+// Routes accessible by super admin
 router.get('/allPhotos', isAuth, isSuperAdmin, photoController.getAllPhotos);
 
 router.get('/allLogs', isAuth, isSuperAdmin, logController.getAllLogs);
@@ -19,6 +29,7 @@ router.get('/allDevices', isAuth, isSuperAdmin, deviceController.getAllDevices);
 router.get('/allLands', isAuth, isSuperAdmin, landController.getAllLands);
 
 
+// Photos routes
 router.get('/photos', isAuth, photoController.getPhotos);
 
 router.get('/photos/:photoId', isAuth, photoController.getPhoto);
@@ -30,6 +41,7 @@ router.delete('/photos/:photoId', isAuth, photoController.deletePhoto);
 router.get('/landPhotos/:landId', isAuth, photoController.getLandPhotos);
 
 
+// Logs routes
 router.get('/logs', isAuth, logController.getLogs);
 
 router.get('/logs/:logId', isAuth, logController.getLog);
@@ -41,6 +53,7 @@ router.delete('/logs/:logId', isAuth, logController.deleteLog);
 router.get('/landLogs/:landId', isAuth, logController.getLandLogs);
 
 
+// Devices routes
 router.get('/devices', isAuth, deviceController.getDevices);
 
 router.get('/devices/:deviceId', isAuth, deviceController.getDevice);
@@ -52,7 +65,7 @@ router.delete('/devices/:deviceId', isAuth, deviceController.deleteDevice);
 router.post('/setDevice', isAuth, deviceController.postUpdateDevice);
 
 
-
+// Lands routes
 router.get('/lands', isAuth, landController.getLands);
 
 router.get('/lands/:landId', isAuth, landController.getLand);

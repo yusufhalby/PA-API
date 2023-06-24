@@ -1,3 +1,11 @@
+/**
+
+auth.js
+This file contains the authentication controller functions for the API application.
+It includes the signup and login functions.
+*/
+
+// Import required modules
 const bcrypt = require('bcryptjs');
 // const nodemailer = require('nodemailer');
 // const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -10,6 +18,7 @@ const {
 const User = require('../models/user');
 
 
+//Handle user signup
 exports.signup = (req, res, next) => {
     // console.log("im here");
     const errors = validationResult(req);
@@ -43,6 +52,8 @@ exports.signup = (req, res, next) => {
     });
 };
 
+
+//Handle user login
 exports.login = (req, res, next) => {
     const password = req.body.password;
     const email = req.body.email;

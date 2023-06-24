@@ -1,7 +1,13 @@
+/**
+
+land.js
+This file defines the land model for the API application using Mongoose.
+*/
 const mongoose = require('mongoose'); 
 
 const Schema = mongoose.Schema;
 
+// Define land schema
 const landSchema = new Schema({
     id:{
         type: Number,
@@ -22,10 +28,5 @@ const landSchema = new Schema({
 
 });
 
+// Export the land model
 module.exports = mongoose.model('Land', landSchema);
-
-
-
-
-
-

@@ -1,3 +1,11 @@
+/**
+
+is-auth.js
+This file defines the authentication middleware for the API application.
+It checks if the user is authenticated by verifying the JWT token in the Authorization header.
+*/
+
+// Import required modules
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {

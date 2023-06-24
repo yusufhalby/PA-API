@@ -1,3 +1,12 @@
+/**
+ * photo.js
+ *
+ * This file contains the controller functions for photo-related operations.
+ * It includes functions for fetching all photos, fetching user-specific photos,
+ * fetching a single photo, creating a new photo, deleting a photo, and fetching photos for a specific land.
+ */
+
+// Import required modules
 const fs = require('fs');
 const path = require('path');
 const { ObjectId } = require('mongodb');
@@ -5,7 +14,7 @@ const { ObjectId } = require('mongodb');
 const Photo =  require('../models/photo');
 const Device =  require('../models/device');
 
-// super admin only
+// Get all photos (Super admin only)
 exports.getAllPhotos = (req, res, next) => {
     const currentPage = req.query.page || 1;
     const perPage = 4;
@@ -35,6 +44,7 @@ exports.getAllPhotos = (req, res, next) => {
 };
 
 
+// Get user-specific photos
 exports.getPhotos = (req, res, next) => {
     const userId= req.userId;
     const currentPage = req.query.page || 1;
@@ -65,6 +75,7 @@ exports.getPhotos = (req, res, next) => {
 };
 
 
+// Get a single photo
 exports.getPhoto = (req, res, next) => {
     const userId= req.userId;
     const photoId = req.params.photoId;
@@ -92,6 +103,7 @@ exports.getPhoto = (req, res, next) => {
 };
 
 
+// Create a new photo
 exports.postPhoto = (req, res, next) => {
     if(!req.file){
         const error = new Error('No image provided.');
@@ -138,6 +150,7 @@ exports.postPhoto = (req, res, next) => {
 };
 
 
+// Delete a photo
 exports.deletePhoto = (req, res, next) => {
     const userId = req.userId;
     const photoId = req.params.photoId;
@@ -168,6 +181,7 @@ exports.deletePhoto = (req, res, next) => {
 };
 
 
+// Get photos for a specific land
 exports.getLandPhotos = (req, res, next) => {
     const userId= req.userId;
     const landId = req.params.landId;
@@ -212,7 +226,7 @@ exports.getLandPhotos = (req, res, next) => {
 };
 
 
-//helper function
+// Helper function to delete the image file
 const clearImage = filePath => {
     filePath = path.join(__dirname, '..', filePath);
     fs.unlink(filePath, err => console.log(err));

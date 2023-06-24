@@ -1,7 +1,15 @@
+/**
+
+device.js
+This file defines the device model for the API application using Mongoose.
+*/
+
+// Import required modules
 const mongoose = require('mongoose'); 
 
 const Schema = mongoose.Schema;
 
+// Define device schema
 const deviceSchema = new Schema({
     waterPump:{ //for control
         type: Boolean,
@@ -24,10 +32,5 @@ const deviceSchema = new Schema({
 
 });
 
+// Export the device model
 module.exports = mongoose.model('Device', deviceSchema);
-
-
-
-
-
-

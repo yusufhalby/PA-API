@@ -1,7 +1,16 @@
+
+/**
+
+user.js
+This file defines the user model for the API application using Mongoose.
+*/
+
+// Import required modules
 const mongoose = require('mongoose'); 
 
 const Schema = mongoose.Schema;
 
+// Define user schema
 const userSchema = new Schema({
     name:{
         type: String,
@@ -21,10 +30,5 @@ const userSchema = new Schema({
     },
 });
 
+// Export the user model
 module.exports = mongoose.model('User', userSchema);
-
-
-
-
-
-

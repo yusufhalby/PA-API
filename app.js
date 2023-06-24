@@ -18,7 +18,9 @@ const projectRoutes = require('./routes/project');
 const authRoutes = require('./routes/auth');
 
 // Set up database connection URI
-// const MONGODB_URI = 'mongodb://127.0.0.1:27017/project?retryWrites=true&w=majority'; //for dev
+//for local development
+// const MONGODB_URI = 'mongodb://127.0.0.1:27017/project?retryWrites=true&w=majority'; 
+//for production
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.bs6du.mongodb.net/${process.env.MONGO_DEF_DB}?retryWrites=true&w=majority`;
 
 // Initialize Express application
