@@ -82,7 +82,7 @@ exports.getDevice = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(device.userId != userId){
+        if(device.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -139,7 +139,7 @@ exports.deleteDevice = (req, res, next) => {
             error.statusCode = 404;
             throw error; //throw the error to catch block
         }
-        if(device.userId != userId){
+        if(device.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -170,7 +170,7 @@ exports.postUpdateDevice = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(device.userId != userId){
+        if(device.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;

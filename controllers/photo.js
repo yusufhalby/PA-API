@@ -87,7 +87,7 @@ exports.getPhoto = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        if(photo.userId != userId){
+        if(photo.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -161,7 +161,7 @@ exports.deletePhoto = (req, res, next) => {
             error.statusCode = 404;
             throw error; //throw the error to catch block
         }
-        if(photo.userId != userId){
+        if(photo.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -196,7 +196,7 @@ exports.getLandPhotos = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(land.userId != userId){
+        if(land.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;

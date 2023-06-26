@@ -84,7 +84,7 @@ exports.getLand = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(land.userId != userId){
+        if(land.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -143,7 +143,7 @@ exports.deleteLand = (req, res, next) => {
             error.statusCode = 404;
             throw error; //throw the error to catch block
         }
-        if(land.userId != userId){
+        if(land.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -179,7 +179,7 @@ exports.postUpdateLand = (req, res, next) => {
                 error.statusCode = 404;
                 throw error; 
             }
-            if(land.userId != userId){
+            if(land.userId != userId || !req.isSuperAdmin){
                 const error = new Error('Not Authorized.');
                 error.statusCode = 401;
                 throw error;

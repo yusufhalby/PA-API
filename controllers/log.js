@@ -84,7 +84,7 @@ exports.getLog = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(log.userId != userId){
+        if(log.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -176,7 +176,7 @@ exports.deleteLog = (req, res, next) => {
             error.statusCode = 404;
             throw error; //throw the error to catch block
         }
-        if(log.userId != userId){
+        if(log.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -210,7 +210,7 @@ exports.getLandLogs = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(land.userId != userId){
+        if(land.userId != userId || !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;

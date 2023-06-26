@@ -62,7 +62,7 @@ router.post('/devices', isAuth, deviceController.postDevice);
 
 router.delete('/devices/:deviceId', isAuth, deviceController.deleteDevice);
 
-router.post('/setDevice', isAuth, deviceController.postUpdateDevice);
+router.post('/updateDevice', isAuth, deviceController.postUpdateDevice);
 
 
 // Lands routes
@@ -74,7 +74,7 @@ router.post('/lands',isAuth, landController.postLand);
 
 router.delete('/lands/:landId', isAuth, landController.deleteLand);
 
-router.post('/lands', isAuth, landController.postUpdateLand);
+router.post('/updateLands', isAuth, landController.postUpdateLand);
 
 
 module.exports = router;
