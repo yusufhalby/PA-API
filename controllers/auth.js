@@ -80,7 +80,7 @@ exports.login = (req, res, next) => {
             id: loadedUser._id.toString(),
             isSuperAdmin: loadedUser.isSuperAdmin
         },
-        'somesupersecretsecret',
+        process.env.JWT_SECRET,
         { expiresIn: '1h' }
         );
         console.log("successful");

@@ -33,7 +33,7 @@ exports.getAllPhotos = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        res.status(200).json({message: 'photoss fetched.', photos, totalItems});
+        res.status(200).json({message: 'Photos fetched.', photos, totalItems});
     })
     .catch(err=>{
         if (!err.statusCode) {
@@ -64,7 +64,7 @@ exports.getPhotos = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        res.status(200).json({message: 'photoss fetched.', photos, totalItems});
+        res.status(200).json({message: 'Photos fetched.', photos, totalItems});
     })
     .catch(err=>{
         if (!err.statusCode) {
@@ -87,12 +87,12 @@ exports.getPhoto = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        if(photo.userId != userId || !req.isSuperAdmin){
+        if(photo.userId != userId && !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
         }
-        res.status(200).json({message: 'photo fetched.', photo});
+        res.status(200).json({message: 'Photo fetched.', photo});
     })
     .catch(err=>{
         if (!err.statusCode) {
@@ -136,7 +136,7 @@ exports.postPhoto = (req, res, next) => {
     })
     .then(result =>{
         res.status(201).json({ 
-            message: 'created successfully',
+            message: 'Created successfully.',
             photo,
         });
     })
@@ -161,7 +161,7 @@ exports.deletePhoto = (req, res, next) => {
             error.statusCode = 404;
             throw error; //throw the error to catch block
         }
-        if(photo.userId != userId || !req.isSuperAdmin){
+        if(photo.userId != userId && !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -170,7 +170,7 @@ exports.deletePhoto = (req, res, next) => {
         return Photo.deleteOne({_id: photoId});
     })
     .then(result=>{
-        res.status(200).json({message: 'photo deleted.'});
+        res.status(200).json({message: 'Photo deleted.'});
     })
     .catch(err=>{
         if (!err.statusCode) {
@@ -196,7 +196,7 @@ exports.getLandPhotos = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(land.userId != userId || !req.isSuperAdmin){
+        if(land.userId != userId && !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -215,7 +215,7 @@ exports.getLandPhotos = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        res.status(200).json({message: 'photoss fetched.', photos, totalItems});
+        res.status(200).json({message: 'Photos fetched.', photos, totalItems});
     })
     .catch(err=>{
         if (!err.statusCode) {

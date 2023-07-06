@@ -4,11 +4,11 @@
   "description": "Web based system for Precision Agriculture Applications in 5G-Based Internet of Things",
   "main": "app.js",
   "engines": {
-    "node": "18.16.0"
+    "node": "18.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "MONGO_USER=Halby MONGO_PASS=root MONGO_DEF_DB=project node app.js",
+    "start": "MONGO_USER=Halby MONGO_PASS=root MONGO_DEF_DB=project JWT_SECRET=somesupersecretsecretandmoresupersecrets node app.js",
     "start-server": "node app.js",
     "start:dev": "nodemon app.js"
   },
@@ -20,7 +20,6 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
-    "csurf": "^1.11.0",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
     "helmet": "^7.0.0",

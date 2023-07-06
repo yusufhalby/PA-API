@@ -82,7 +82,7 @@ exports.getDevice = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(device.userId != userId || !req.isSuperAdmin){
+        if(device.userId != userId && !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -101,13 +101,13 @@ exports.getDevice = (req, res, next) => {
 exports.postDevice = (req, res, next) => {
     // console.log(req);
     const waterPump = req.body.waterPump;
-    const anyPump = req.body.anyPump;
+    const fertPump = req.body.fertPump;
     // const landId = new ObjectId("64334038a421c67ef36399e1") ;
     const landId = req.body.landId;
     const userId = req.userId;
     const device = new Device({
         waterPump,
-        anyPump,
+        fertPump,
         landId,
         userId
     });
@@ -116,7 +116,7 @@ exports.postDevice = (req, res, next) => {
     .save()
     .then(result =>{
         res.status(201).json({
-            message: 'created successfully',
+            message: 'Created successfully.',
             device
         });
     })
@@ -139,7 +139,7 @@ exports.deleteDevice = (req, res, next) => {
             error.statusCode = 404;
             throw error; //throw the error to catch block
         }
-        if(device.userId != userId || !req.isSuperAdmin){
+        if(device.userId != userId && !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
@@ -161,7 +161,7 @@ exports.deleteDevice = (req, res, next) => {
 exports.postUpdateDevice = (req, res, next) => {
     const userId = req.userId;
     const waterPump = req.body.waterPump;
-    const anyPump = req.body.anyPump;
+    const fertPump = req.body.fertPump;
     const deviceId = req.body.deviceId;
     Device.findById(deviceId)
     .then(device => {
@@ -170,18 +170,18 @@ exports.postUpdateDevice = (req, res, next) => {
             error.statusCode = 404;
             throw error; 
         }
-        if(device.userId != userId || !req.isSuperAdmin){
+        if(device.userId != userId && !req.isSuperAdmin){
             const error = new Error('Not Authorized.');
             error.statusCode = 401;
             throw error;
         }
         device.waterPump = waterPump;
-        device.anyPump = anyPump;
+        device.fertPump = fertPump;
         return device.save();
     })
     .then(result => {
         res.status(201).json({
-            message: 'Updated successfully',
+            message: 'Updated successfully.',
             device
         });
     })

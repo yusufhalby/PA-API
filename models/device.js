@@ -11,12 +11,12 @@ const Schema = mongoose.Schema;
 
 // Define device schema
 const deviceSchema = new Schema({
-    waterPump:{ //for control
+    waterPump:{ //for controllling watering
         type: Boolean,
         default: false,
         required: true,
     },
-    anyPump:{ //for control
+    fertPump:{ //for controllling fertilization
         type: Boolean,
         default: false,
         required: true,

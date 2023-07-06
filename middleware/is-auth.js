@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
     //The setup in front-end must be: headers: {Authorization: 'Bearer ' + this.props.token}
     let decodedToken;
     try{
-        decodedToken= jwt.verify(token, 'somesupersecretsecret')
+        decodedToken= jwt.verify(token, process.env.JWT_SECRET)
     } catch (err) {
         err.statusCode =500;
         throw err
