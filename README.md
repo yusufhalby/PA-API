@@ -41,15 +41,14 @@ This project is a web-based system that focuses on Precision Agriculture Applica
 
 -   bcryptjs
 -   body-parser
--   csurf
 -   express
 -   express-validator
 -   helmet
 -   jsonwebtoken
 -   mongoose
 -   multer
--   nodemailer
--   nodemailer-sendgrid-transport
+<!-- -   nodemailer
+-   nodemailer-sendgrid-transport -->
 
 ## License
 
