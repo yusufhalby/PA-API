@@ -25,6 +25,9 @@ const landSchema = new Schema({
         ref: 'User',
         required: true
     },
+    coordinates:{
+        type: Array,
+    },
 
 },{ timestamps: true });
 

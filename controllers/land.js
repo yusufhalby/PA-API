@@ -105,6 +105,7 @@ exports.postLand = (req, res, next) => {
     // console.log(req);
     const userId= req.userId;
     const id = req.body.id;
+    const coordinates = req.body.coordinates;
     const plantLabel = req.body.plantLabel || "";
     const description = req.body.description || "";
 
@@ -113,6 +114,7 @@ exports.postLand = (req, res, next) => {
         plantLabel,
         description,
         userId,
+        coordinates,
     });
 
     land
