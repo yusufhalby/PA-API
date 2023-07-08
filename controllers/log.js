@@ -247,7 +247,7 @@ exports.getAddLog = (req, res, next) => {
     const deviceId = req.params.deviceId;
     console.log(deviceId);
     const {N, P, K, temperature, humidity, ph, rainfall} = generateRandomLog();
-    fetch('http://localhost:'+ process.env.PORT || '8080' +'/logs',{
+    fetch('https://pa-api.onrender.com/logs',{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
