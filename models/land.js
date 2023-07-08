@@ -26,7 +26,7 @@ const landSchema = new Schema({
         required: true
     },
 
-});
+},{ timestamps: true });
 
 // Export the land model
 module.exports = mongoose.model('Land', landSchema);

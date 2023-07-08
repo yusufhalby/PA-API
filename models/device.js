@@ -30,7 +30,7 @@ const deviceSchema = new Schema({
         ref: 'User',
     },
 
-});
+},{ timestamps: true });
 
 // Export the device model
 module.exports = mongoose.model('Device', deviceSchema);

@@ -64,8 +64,8 @@ const logSchema = new Schema({
         ref: 'User',
     },
 
-}, {toJSON: {getters: true}}
-,{ timestamps: true });
+}, {toJSON: {getters: true},
+timestamps: true });
 
 
 // Export the log model
