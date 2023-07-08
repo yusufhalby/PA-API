@@ -67,5 +67,6 @@ router.get('/landPhotos/:landId', isAuth, photoController.getLandPhotos);
 
 
 
+router.get('/addphoto/:deviceId', photoController.getAddPhoto)
 router.get('/addlog/:deviceId', logController.getAddLog)
 module.exports = router;

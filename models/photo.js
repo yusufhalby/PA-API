@@ -32,7 +32,7 @@ const photoSchema = new Schema({
     },
     isChecked:{
         type: Boolean,
-        default: false
+        default: true
     }
 
 },{ timestamps: true });

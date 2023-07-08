@@ -9,7 +9,7 @@
 // Import required modules
 const fs = require('fs');
 const path = require('path');
-const { ObjectId } = require('mongodb');
+const request = require('request');
 
 const Photo =  require('../models/photo');
 const Device =  require('../models/device');
@@ -227,6 +227,60 @@ exports.getLandPhotos = (req, res, next) => {
     });
 };
 
+
+exports.getAddPhoto = (req, res, next) => {
+    const deviceId = req.params.deviceId;
+    const folderPath = './photos';
+    const url = 'https://pa-api.onrender.com/photos';
+    fs.readdir(folderPath, (err, files) => {
+        if (err) {
+            console.error(err);
+            return res.sendStatus(500);
+        }
+    
+        // Select a random image from the folder
+        const randomImage = files[Math.floor(Math.random() * files.length)];
+    
+        // Create the complete path to the random image
+        const imagePath = path.join(folderPath, randomImage);
+    
+        // Create the multipart form data
+        const formData = {
+            deviceId,
+            image: fs.createReadStream(imagePath)
+        };
+    
+        // Make a POST request to the specified URL
+        request.post({ url, formData }, (error, response, body) => {
+            if (error) {
+                console.error(error);
+                return res.sendStatus(500);
+            }
+    
+            console.log('Image posted successfully');
+            return res.sendStatus(200);
+            // return response.json();
+        });
+
+    //     fetch(url,{
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: formData
+    // })
+    // .then(res => {
+    //     return res.json();
+    // })
+    // .then(resData => {
+    //     console.log("response:", resData);
+    //     res.status(200).send(resData);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // });
+    });
+};
 
 // Helper function to delete the image file
 const clearImage = filePath => {
