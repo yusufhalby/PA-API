@@ -10,6 +10,9 @@
 const Log = require('../models/log');
 const Device = require('../models/device');
 const Land = require('../models/land');
+const dataset = require('../dataset.json');
+const { json } = require('body-parser');
+// const fetch = require('node-fetch');
 
 
 // Get all logs (Super admin only)
@@ -115,7 +118,6 @@ exports.postLog = (req, res, next) => {
     let label;
     let userId;
     let log;
-
     Device
     .findById(deviceId)
     .then(device =>{
@@ -134,7 +136,7 @@ exports.postLog = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        label = land.plantLabel;
+        label = findLabel({N:n, P:p, K:k, temperature:temp, humidity, ph, rainfall,});
         log = new Log({
             n,
             p,
@@ -237,4 +239,76 @@ exports.getLandLogs = (req, res, next) => {
         }
         next(err);
     });
+};
+
+
+
+exports.getAddLog = (req, res, next) => {
+    const deviceId = req.params.deviceId;
+    console.log(deviceId);
+    const {N, P, K, temperature, humidity, ph, rainfall} = generateRandomLog();
+    fetch('http://localhost:'+ process.env.PORT || '8080' +'/logs',{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({n:N, p:P, k:K, temp:temperature, humidity, ph, rainfall, deviceId})
+    })
+    .then(res => {
+        return res.json();
+    })
+    .then(resData => {
+        console.log("response:", resData);
+        res.status(200).send(resData);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+};
+
+
+
+
+
+function findLabel(targetObject) {
+    let nearestReading = null;
+    let minDifference = Infinity;
+
+    dataset.forEach((object) => {
+        const difference = calculateSimilarity(targetObject, object);
+        if (difference < minDifference) {
+        minDifference = difference;
+        nearestReading = object;
+        }
+    });
+    return nearestReading.label;
+};
+
+function calculateSimilarity(obj1, obj2) {
+    const keys = Object.keys(obj1);
+    let sumOfSquaredDifferences = 0;
+
+    keys.forEach((key) => {
+        sumOfSquaredDifferences += Math.pow(obj1[key] - obj2[key], 2);
+    });
+
+    return Math.sqrt(sumOfSquaredDifferences);
+};
+
+function getRandomValue(min, max) {
+    return Math.random() * (max - min) + min;
+};
+
+function generateRandomLog() {
+    const randomObject = {
+        N: getRandomValue(1, 139),
+        P: getRandomValue(5, 145),
+        K: getRandomValue(5, 205),
+        temperature: getRandomValue(10, 43),
+        humidity: getRandomValue(14, 99),
+        ph: getRandomValue(3.51, 9.45),
+        rainfall: getRandomValue(20, 291),
+    };
+
+    return randomObject;
 };

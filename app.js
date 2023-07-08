@@ -35,7 +35,8 @@ const fileStorage = multer.diskStorage({
         cb(null, 'images');
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString().replace(/:/g, '.') + '-' + file.originalname);
+        req.fileName = file.originalname.slice(0,-5);
+        cb(null, new Date().toISOString().replace(/:/g, '.') + '-' + 'photo.jpg');
     },
 });
 
@@ -73,7 +74,7 @@ app.use(projectRoutes);
 // Route to handle requests to the API root domain
 app.get('/', (req, res, next)=>{
     // Send a welcome message to users accessing the root domain
-    return res.send(`
+    return res.status(200).send(`
         <h1>Welcome to the Precision Agriculture API!</h1>
         <p>This API provides endpoints for accessing and managing precision agriculture data. It offers a range of features and functionalities to optimize agricultural processes, improve crop yield, and enhance farming efficiency.</p>
         <p>Please refer to the API documentation for detailed information on available endpoints and how to interact with the API.</p>

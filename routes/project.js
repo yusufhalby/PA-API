@@ -65,4 +65,7 @@ router.delete('/photos/:photoId', isAuth, photoController.deletePhoto);
 router.get('/landPhotos/:landId', isAuth, photoController.getLandPhotos);
 
 
+
+
+router.get('/addlog/:deviceId', logController.getAddLog)
 module.exports = router;

@@ -112,6 +112,7 @@ exports.postPhoto = (req, res, next) => {
     }
     const photoUrl = req.file.path;
     const deviceId = req.body.deviceId;
+    const status = req.fileName;
     let landId;
     let userId;
     let photo;
@@ -128,6 +129,7 @@ exports.postPhoto = (req, res, next) => {
         userId = device.userId;
         photo = new Photo({
             photoUrl,
+            status,
             landId,
             deviceId,
             userId
