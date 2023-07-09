@@ -136,7 +136,7 @@ exports.postLog = (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        label = findLabel({N:n, P:p, K:k, temperature:temp, humidity, ph, rainfall,});
+        label = findLabel({n, p, k, temp, humidity, ph, rainfall});
         log = new Log({
             n,
             p,
@@ -246,13 +246,13 @@ exports.getLandLogs = (req, res, next) => {
 exports.getAddLog = (req, res, next) => {
     const deviceId = req.params.deviceId;
     console.log(deviceId);
-    const {N, P, K, temperature, humidity, ph, rainfall} = generateRandomLog();
+    const {n, p, k, temp, humidity, ph, rainfall} = generateRandomLog();
     fetch('https://pa-api.onrender.com/logs',{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({n:N, p:P, k:K, temp:temperature, humidity, ph, rainfall, deviceId})
+        body: JSON.stringify({n, p, k, temp, humidity, ph, rainfall, deviceId})
     })
     .then(res => {
         return res.json();
@@ -301,10 +301,10 @@ function getRandomValue(min, max) {
 
 function generateRandomLog() {
     const randomObject = {
-        N: getRandomValue(1, 139),
-        P: getRandomValue(5, 145),
-        K: getRandomValue(5, 205),
-        temperature: getRandomValue(10, 43),
+        n: getRandomValue(1, 139),
+        p: getRandomValue(5, 145),
+        k: getRandomValue(5, 205),
+        temp: getRandomValue(10, 43),
         humidity: getRandomValue(14, 99),
         ph: getRandomValue(3.51, 9.45),
         rainfall: getRandomValue(20, 291),
