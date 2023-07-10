@@ -5,19 +5,19 @@ Web based system for Precision Agriculture Applications in 5G-Based Internet of 
 ## Description
 
 This project is a web-based system that focuses on Precision Agriculture Applications using the 5G-Based Internet of Things (IoT) technology. It aims to provide advanced functionalities and features to optimize agricultural processes and improve crop yield and efficiency. The system utilizes various technologies and frameworks to create a robust and scalable solution for precision agriculture.
-
+<!-- 
 ## Features
 
 - Feature 1
 - Feature 2
-- Feature 3
+- Feature 3 -->
 
 ## Installation
 
 1. Clone the repository:
 
    ```shell
-   git clone <repository-url>
+   git clone https://github.com/yusufhalby/PA-API.git
 2. Install the dependencies:
 
 	```shell
@@ -26,6 +26,7 @@ This project is a web-based system that focuses on Precision Agriculture Applica
 	-   MONGO_USER: MongoDB username
 	-   MONGO_PASS: MongoDB password
 	-   MONGO_DEF_DB: MongoDB default database name
+	-   JWT_SECRET: JSON Web Tokes secret key
 
 4. Start the server:
 	```shell		
