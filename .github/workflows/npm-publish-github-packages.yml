@@ -37,3 +37,4 @@ jobs:
           MONGO_USER: Halby
           MONGO_PASS: root 
           MONGO_DEF_DB: project
+          JWT_SECRET: somesupersecretsecretandmoresupersecrets
